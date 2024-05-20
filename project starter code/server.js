@@ -59,6 +59,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util.js';
         deleteLocalFiles([result]);
       });
     } catch (error) {
+      console.log(error);
       return res.status(500).send('Internal Server Error');
     }
   });
