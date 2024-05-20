@@ -43,3 +43,22 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util.js';
       console.log( `server running http://localhost:${ port }` );
       console.log( `press CTRL+C to stop server` );
   } );
+
+  app.get("/filteredimage", async (req, res) => {
+    const image_url = req.query.image_url;
+    if (!image_url) {
+      return res.status(400).send('Image url cannot be empty');
+    };
+    try {
+      const result = await filterImageFromURL(image_url);
+      if (!result) {
+        return res.status(404).send('Filtered image not found');
+      }
+      console.log('result', result);
+      res.sendFile(result, () => {
+        deleteLocalFiles([result]);
+      });
+    } catch (error) {
+      return res.status(500).send('Internal Server Error');
+    }
+  });
