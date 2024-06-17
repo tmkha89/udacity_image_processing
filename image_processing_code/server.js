@@ -40,7 +40,7 @@ import {validateImageUrl, filterImageFromURL, deleteLocalFiles} from './util/uti
       });
     }
     else{
-      return res.status(400).send('Please input valid image url');
+      return res.status(404).send('Please input valid image url');
     }
   } );
 
