@@ -1,5 +1,9 @@
 # Full Stack Apps on AWS Project
 
-Web Service URL: http://khatm1-udacity-image-proccessing-env-2.us-east-1.elasticbeanstalk.com/filteredimage?image_url={{URL}}
+App url: http://khatm1-udacity-image-proccessing-env-2.us-east-1.elasticbeanstalk.com/filteredimage?image_url={url}
 
-Screenshot file: screenshot_eb_after_deployment.png
+Test url: http://khatm1-udacity-image-proccessing-env-2.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://github.com/tmkha89/udacity_image_processing/blob/master/deployment/test_image.jpg?raw=true
+
+Result: https://github.com/tmkha89/udacity_image_processing/blob/master/deployment/filtered_image.jpg?raw=true
+
+Elastic Beanstalk screenshot: deployment\screenshot_eb_after_deployment.png

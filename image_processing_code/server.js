@@ -25,6 +25,7 @@ import {validateImageUrl, filterImageFromURL, deleteLocalFiles} from './util/uti
   // Receive image and display filtered version of that image
   app.get( "/filteredimage", async (req, res) => {
     const requestToken = req.headers['authorization'];
+    
     if (requestToken != token)
       return res.status(403).send('Unauthorized');
 
