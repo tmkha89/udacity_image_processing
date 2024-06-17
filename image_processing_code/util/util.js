@@ -11,7 +11,7 @@ import Jimp from "jimp";
  export async function filterImageFromURL(inputURL) {
   return new Promise(async (resolve, reject) => {
     try {
-      const photo = await Jimp.read(inputURL);
+      const photo = await Jimp.read(encodeURI(inputURL));
       const appFolder = process.cwd().replace(/\\/g, '/');
       const outpath = appFolder + "/tmp/filtered." + Math.floor(Math.random() * 2000) + ".jpg";
       await photo
@@ -49,6 +49,7 @@ import Jimp from "jimp";
 export function validateImageUrl(inputURL){
   if(!inputURL) return false;
 
-  const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+  const urlRegex = /^(ftp|http|https):\/\//;
   return urlRegex.test(inputURL);
 }
+

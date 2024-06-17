@@ -22,25 +22,29 @@ import {validateImageUrl, filterImageFromURL, deleteLocalFiles} from './util/uti
   app.get( "/filteredimage", async (req, res) => {
     // validate input parameter
     if(validateImageUrl(req.query.image_url)){
+      try{
+        // proccessing filtered image
+        let filteredImage = await filterImageFromURL(req.query.image_url);
 
-      // proccessing filtered image
-      let filteredImage = await filterImageFromURL(req.query.image_url);
+        // display filtered image
+        res.sendFile(filteredImage, (err) => {
+          
+          // return error failing to display image
+          if (err) {
+              console.error('Error sending file:', err);
+              res.status(err.status).end();
+          } 
 
-      // display filtered image
-      res.sendFile(filteredImage, (err) => {
-        
-        // return error failing to display image
-        if (err) {
-            console.error('Error sending file:', err);
-            res.status(err.status).end();
-        } 
-
-        // remove localfile after display
-        deleteLocalFiles([filteredImage]);
-      });
+          // remove localfile after display
+          deleteLocalFiles([filteredImage]);
+        });
+      }
+      catch(err){
+        res.status(400).send("Fail to filter image: " + err.message);
+      }
     }
     else{
-      return res.status(400).send('Please input valid image url');
+      return res.status(404).send('Please input valid image url');
     }
   } );
 
