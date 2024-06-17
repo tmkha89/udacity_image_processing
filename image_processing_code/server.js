@@ -8,6 +8,10 @@ import {validateImageUrl, filterImageFromURL, deleteLocalFiles} from './util/uti
   // Set the network port
   const port = process.env.PORT || 8082;
   
+  // using token to authorize request
+  // this token is for demostration purpose only
+  const token = 'Bearer o1qSgHmbrUJbmY2YVdouMWI2z9kOrYZzjspJEiZPPEkKycRv4VIaAdBw3Dr9P9rY';
+
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
     
@@ -20,6 +24,10 @@ import {validateImageUrl, filterImageFromURL, deleteLocalFiles} from './util/uti
   // FilteredImage Endpoint
   // Receive image and display filtered version of that image
   app.get( "/filteredimage", async (req, res) => {
+    const requestToken = req.headers['authorization'];
+    if (requestToken != token)
+      return res.status(403).send('Unauthorized');
+
     // validate input parameter
     if(validateImageUrl(req.query.image_url)){
       try{
