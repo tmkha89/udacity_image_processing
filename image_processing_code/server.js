@@ -24,10 +24,10 @@ import {validateImageUrl, filterImageFromURL, deleteLocalFiles} from './util/uti
   // FilteredImage Endpoint
   // Receive image and display filtered version of that image
   app.get( "/filteredimage", async (req, res) => {
-    const requestToken = req.headers['authorization'];
+    // const requestToken = req.headers['authorization'];
     
-    if (requestToken != token)
-      return res.status(403).send('Unauthorized');
+    // if (requestToken != token)
+    //   return res.status(403).send('Unauthorized');
 
     // validate input parameter
     if(validateImageUrl(req.query.image_url)){
