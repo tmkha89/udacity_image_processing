@@ -32,7 +32,7 @@ import {validateImageUrl, filterImageFromURL, deleteLocalFiles} from './util/uti
         // return error failing to display image
         if (err) {
             console.error('Error sending file:', err);
-            res.status(err.status).end();
+            res.status(400).end();
         } 
 
         // remove localfile after display
